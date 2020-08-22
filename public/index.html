@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ 
+
+  <!-- CSS only -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+    integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+  <link rel="stylesheet" href="./css/main.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css">
+
+
+  <!-- JS, Popper.js, and jQuery -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+    integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+    crossorigin="anonymous"></script>
+
+  <script src="./js/main.js"></script>
+  <script src="./js/api.js"></script>
+
+</head>
+
+<body>
+  <!-- <h2>
+    Project 3
+  </h2> -->
+
+  <h4 style="text-align: center; margin-bottom: 2rem;">
+    ADMIN PAGE
+  </h4>
+
+  <div class="container">
+    <table class="table table-hover" id="table-content">
+      <thead>
+        <tr>
+          
+          <th scope="col">Name</th>
+          <th scope="col">Address</th>
+          <th scope="col">Description</th>
+          <th scope="col">Price</th>
+          <th scope="col">Discount Number</th>
+          <th scope="col">Room Number</th>
+          <th scope="col">Area</th>
+
+          <th scope="col">
+            Actions
+          </th>
+          <th scope="col" for="sorts">
+            Sort:
+            <select id="sorts" name="sorts">
+              <option value="asc" selected>Ascending</option>
+              <option value="desc">Descending</option>
+            </select>
+          </th>
+          <th scope="col"> <button type="button" class="btn btn-outline-primary btnAdd" data-toggle="modal" data-target="#addModal">
+            Add
+         </button></th>
+        </tr>
+      </thead>
+      <tbody id="body-content">
+      </tbody>
+    </table>
+
+
+        <!-- Add Modal -->
+        <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Add</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form>
+                <div class="form-group">
+                  <label for="recipient-name" class="col-form-label">Name:</label>
+                  <input type="text" class="form-control" id="add-name">
+                </div>
+                <div class="form-group">
+                  <label for="recipient-name" class="col-form-label">Address:</label>
+                  <input type="text" class="form-control" id="add-address">
+                </div>
+                <div class="form-group">
+                  <label for="message-text" class="col-form-label">Description:</label>
+                  <textarea class="form-control" id="add-description"></textarea>
+                </div>
+                <div class="form-group">
+                  <label for="recipient-name" class="col-form-label">Price:</label>
+                  <input type="number" class="form-control" id="add-price">
+                </div>
+                <div class="form-group">
+                  <label for="recipient-name" class="col-form-label">Discount Number:</label>
+                  <input type="number" class="form-control" id="add-discount">
+                </div>
+                <div class="form-group">
+                  <label for="recipient-name" class="col-form-label">Room Number:</label>
+                  <input type="number" class="form-control" id="add-room">
+                </div>
+                <div class="form-group">
+                  <label for="recipient-name" class="col-form-label">Area:</label>
+                  <input type="number" class="form-control" id="add-area">
+                </div>
+              </form>
+            
+            </div>
+            <div class="modal-footer">
+              <button type="button" id="addBtnSubmit" class="btn btn-outline-primary" onclick="createProduct()">Yes</button>
+              <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+    <!-- Update Modal -->
+    <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Update</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <label for="recipient-name" class="col-form-label">Name:</label>
+              <input type="text" class="form-control" id="edit-name">
+            </div>
+            <div class="form-group">
+              <label for="recipient-name" class="col-form-label">Address:</label>
+              <input type="text" class="form-control" id="edit-address">
+            </div>
+            <div class="form-group">
+              <label for="message-text" class="col-form-label">Description:</label>
+              <textarea class="form-control" id="edit-description"></textarea>
+            </div>
+            <div class="form-group">
+              <label for="recipient-name" class="col-form-label">Price:</label>
+              <input type="number" class="form-control" id="edit-price">
+            </div>
+            <div class="form-group">
+              <label for="recipient-name" class="col-form-label">Discount Number:</label>
+              <input type="number" class="form-control" id="edit-discount">
+            </div>
+            <div class="form-group">
+              <label for="recipient-name" class="col-form-label">Room Number:</label>
+              <input type="number" class="form-control" id="edit-room">
+            </div>
+            <div class="form-group">
+              <label for="recipient-name" class="col-form-label">Area:</label>
+              <input type="number" class="form-control" id="edit-area">
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="UpdateBtnSubmit" class="btn btn-outline-primary" onclick="editProduct()">Yes</button>
+          <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>  
+
+    <!-- Delete Modal -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Warning</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            You really want to delete this product?
+          </div>
+          <div class="modal-footer">
+            <button type="button" id="deleteBtnSubmit" data-dismiss="modal" class="btn btn-outline-primary" onclick="deleteProduct()">Yes</button>
+            <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class="pageSize-area">
+      <label for="pageSize">Choose the number of items you want: </label>
+
+      <select id="pageSize" name="pageSize">
+        <option value="3">3</option>
+        <option value="5" selected>5</option>
+        <option value="10">10</option>
+      </select>
+    </div>
+
+    <div class="pagination-controls">
+      <a href="" id="left">
+        <i class="fas fa-chevron-left"></i>
+      </a>
+      <span id="paginations">
+      </span>
+
+      <a href="" id="right">
+        <i class="fas fa-chevron-right"></i>
+      </a>
+    </div>
+  </div>
+</body>
+
+</html>

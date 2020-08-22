@@ -1,0 +1,17 @@
+auth ->     sign up                 token ::  library support: jsonwebtoken npm
+                            => Send email
+            sign in
+            update profile(self update)
+            adminResetPassword()
+
+mongo CRUD API ->       filter     
+                        pagination
+
+
+
+accessToken     
+refreshToken: không dùng để định danh
+
+
+
+

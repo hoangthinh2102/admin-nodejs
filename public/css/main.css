@@ -1,0 +1,22 @@
+body{
+    /* background: greenyellow; */
+}
+
+
+.pagination-controls {
+    text-align: center;
+}
+
+.pagination-controls a {
+    margin: 5px;
+    text-decoration: none;
+}
+
+.current{
+    font-size: x-large;
+    color: black;
+}
+
+.fas { 
+    margin-right: 10px;
+}
